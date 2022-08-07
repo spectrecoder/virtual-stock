@@ -1,0 +1,128 @@
+<div class="container" style="margin-top: 5em;">
+    <div class="row">
+        <h3>Stocks Form
+            <span class="right-sm">
+                <button type="button" class="btn btn-success" (click)="Save()">Save</button>
+                <button type="button" class="btn btn-warning" (click)="Cancel()">cancel</button>
+            </span>
+        </h3>
+    </div>
+    <form class="card" [formGroup]="stocksForm">
+
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-lg-6">Stock Name</label>
+                    <input type="text" formControlName="stockName" (drop)="$event.preventDefault()"
+                        (paste)="$event.preventDefault()" class="form-control form-control-sm">
+                    <span class="text-danger" *ngIf="submitted && s.stockName.errors?.required">Stock Name is
+                        Required</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Buy Price</label>
+                    <input type="text" formControlName="price" (blur)="calculateTotalInvestment()"
+                        (drop)="$event.preventDefault()" (paste)="$event.preventDefault()"
+                        (keypress)="numericDecimal($event)" class="form-control form-control-sm">
+                    <span class="text-danger" *ngIf="submitted && s.price.errors?.required">Buy Price is Required</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="">Quantity</label>
+                    <input type="text" formControlName="quantity" (blur)="calculateTotalInvestment()"
+                        (drop)="$event.preventDefault()" (paste)="$event.preventDefault()"
+                        (keypress)="onlyNumeric($event)" class="form-control form-control-sm">
+                    <span class="text-danger" *ngIf="submitted && s.quantity.errors?.required">Quantity is
+                        Required</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-lg-6">Sector</label>
+                    <input type="text" formControlName="sector" (drop)="$event.preventDefault()"
+                        (paste)="$event.preventDefault()" class="form-control form-control-sm">
+                    <span class="text-danger" *ngIf="submitted && s.sector.errors?.required">Sector is Required</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Market Cap</label>
+                    <input type="text" formControlName="marketCap" (drop)="$event.preventDefault()"
+                        (paste)="$event.preventDefault()" (keypress)="numericDecimal($event)"
+                        class="form-control form-control-sm">
+                    <span class="text-danger" *ngIf="submitted && s.marketCap.errors?.required">Market Cap is
+                        Required</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="">Total Investment</label>
+                    <input type="text" formControlName="totalInvestment" (drop)="$event.preventDefault()"
+                        (paste)="$event.preventDefault()" (keypress)="numericDecimal($event)"
+                        class="form-control form-control-sm">
+                    <span class="text-danger" *ngIf="submitted && s.totalInvestment.errors?.required">Total Investment
+                        is Required</span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="card" style="margin-top: 2em;">
+        <div class="row">
+            <h3>Available Stocks</h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Serial No</th>
+                    <th>Stock Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Investment</th>
+                    <th>Market Cap</th>
+                    <th>Sector</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+            <tbody *ngIf="stocksList.length > 0">
+                <tr *ngFor="let item of stocksList;let i = index;">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.stockName}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.totalInvestment}}</td>
+                    <td>{{item.marketCap}}</td>
+                    <td>{{item.sector}}</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary">Edit</button>
+                        <button type="button" class="btn btn-danger" (click)="Delete(item.Id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" style="margin-top:2em;">
+        <div class="row">
+            <h3>Available Stocks</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">Number of Stocks</div>
+            <div class="col-sm-6">{{stocksList.length}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">Total Investments</div>
+            <div class="col-sm-6">{{totalAmount}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Allocation</div>
+            <div class="col-sm-9">
+                <div echarts [options]="chartOption" class="demo-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
