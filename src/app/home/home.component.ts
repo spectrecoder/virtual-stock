@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
   stocksList: any[] = [];
   submitted: boolean = false;
+  isEdit:boolean = false;
 
   localStorageName: string = 'StocksList';
 
@@ -55,6 +56,26 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  Edit(item:any){
+    this.isEdit = true;
+    this.stocksForm.patchValue(item);
+  }
+
+  Update(){
+    this.submitted = true;
+    if (this.stocksForm.valid) {
+      this.stocksList = this.stocksList.filter(e => e.Id != this.stocksForm.value.Id);
+      this.stocksList.push(this.stocksForm.value);
+      this.AddSerialNo();
+      this.json.Save(this.stocksList, this.localStorageName);
+      this.submitted = false;
+      this.Cancel();
+    }
+    else {
+
+    }
+  }
+
   Delete(Id: number) {
     this.stocksList = this.stocksList.filter(e => e.Id != Id);
     this.AddSerialNo();
@@ -65,6 +86,7 @@ export class HomeComponent implements OnInit {
   Cancel() {
     this.stocksForm.reset();
     this.submitted = false;
+    this.isEdit = false;
   }
 
   BindStocks() {
@@ -72,6 +94,7 @@ export class HomeComponent implements OnInit {
     let list = this.json.Get(this.localStorageName);
     if (list) {
       this.stocksList = list;
+      this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
       this.AddSerialNo();
     }
 
@@ -92,7 +115,7 @@ export class HomeComponent implements OnInit {
     let quantity = this.stocksForm.value.quantity;
     if (price && quantity) {
       let totalInvestment = price * quantity;
-      this.stocksForm.controls["totalInvestment"].setValue(totalInvestment);
+      this.stocksForm.controls["totalInvestment"].setValue(Number(totalInvestment.toFixed(2)));
     }
   }
 
@@ -100,6 +123,7 @@ export class HomeComponent implements OnInit {
     this.totalAmount = 0;
     if (this.stocksList?.length > 0)
       this.stocksList.forEach(e => this.totalAmount = e.totalInvestment + this.totalAmount);
+      this.totalAmount = Number(this.totalAmount.toFixed(2));
   }
 
   fillChart() {
