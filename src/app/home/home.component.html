@@ -2,15 +2,13 @@
     <div class="row">
         <h3>Stocks Form
             <span class="right-sm">
-                <button type="button" class="btn btn-success" (click)="Save()">Save</button>
-                <button type="button" class="btn btn-warning" (click)="Cancel()">cancel</button>
+                <button type="button" class="btn btn-primary" *ngIf="!isEdit" (click)="Save()">Save</button>
+                <button type="button" class="btn btn-primary" *ngIf="isEdit" (click)="Update()">Update</button>
+                <button type="button" class="btn btn-secondary" (click)="Cancel()">cancel</button>
             </span>
         </h3>
     </div>
     <form class="card" [formGroup]="stocksForm">
-
-
-
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -98,7 +96,7 @@
                     <td>{{item.marketCap}}</td>
                     <td>{{item.sector}}</td>
                     <td>
-                        <button type="button" class="btn btn-secondary">Edit</button>
+                        <button type="button" class="btn btn-primary" (click)="Edit(item)">Edit</button>
                         <button type="button" class="btn btn-danger" (click)="Delete(item.Id)">Delete</button>
                     </td>
                 </tr>
