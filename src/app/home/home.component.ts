@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   totalAmount: number = 0;
 
   chartOption: EChartsOption = {};
+  chartOptionBar: EChartsOption = {};
 
   constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService) { }
 
@@ -135,8 +136,27 @@ export class HomeComponent implements OnInit {
         obj.name = e.stockName;
         obj.value = e.totalInvestment;
         datalist.push(obj);
-      })
+      });
+
       this.chartOption = {
+        tooltip: {
+          trigger: 'item'
+        },
+        series: {
+          type: 'pie',
+          radius: '60%',
+          data: datalist,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0,0,0,0.5)'
+            }
+          }
+        }
+      };
+
+      this.chartOptionBar = {
         tooltip: {
           trigger: 'item'
         },
