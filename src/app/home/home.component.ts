@@ -157,20 +157,24 @@ export class HomeComponent implements OnInit {
       };
 
       this.chartOptionBar = {
+        xAxis:{
+          data:this.stocksList.map( x => x.stockName)
+        },
+        yAxis:{
+
+        },
+        dataZoom: [
+          {
+            type: 'inside'
+          }
+        ],
         tooltip: {
           trigger: 'item'
         },
         series: {
-          type: 'pie',
-          radius: '60%',
-          data: datalist,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0,0,0,0.5)'
-            }
-          }
+          type: 'bar',
+          //radius: '60%',
+          data: this.stocksList.map(x => x.totalInvestment),
         }
       };
     }
