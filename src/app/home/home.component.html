@@ -106,7 +106,7 @@
 
     <div class="card" style="margin-top:2em;">
         <div class="row">
-            <h3>Available Stocks</h3>
+            <h3>Portfolio</h3>
         </div>
         <div class="row">
             <div class="col-sm-6">Number of Stocks</div>
@@ -116,9 +116,17 @@
             <div class="col-sm-6">Total Investments</div>
             <div class="col-sm-6">{{totalAmount}}</div>
         </div>
+        
+    </div>
+    <div class="card" style="margin-top:2em;">
         <div class="row">
-            <div class="col-sm-3">Allocation</div>
-            <div class="col-sm-9">
+            <h3>Available Stocks</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div echarts [options]="chartOptionBar" class="demo-chart"></div>
+            </div>
+            <div class="col-sm-6">
                 <div echarts [options]="chartOption" class="demo-chart"></div>
             </div>
         </div>

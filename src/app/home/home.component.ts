@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   totalAmount: number = 0;
 
   chartOption: EChartsOption = {};
+  chartOptionBar: EChartsOption = {};
 
   constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService) { }
 
@@ -135,7 +136,8 @@ export class HomeComponent implements OnInit {
         obj.name = e.stockName;
         obj.value = e.totalInvestment;
         datalist.push(obj);
-      })
+      });
+
       this.chartOption = {
         tooltip: {
           trigger: 'item'
@@ -151,6 +153,28 @@ export class HomeComponent implements OnInit {
               shadowColor: 'rgba(0,0,0,0.5)'
             }
           }
+        }
+      };
+
+      this.chartOptionBar = {
+        xAxis:{
+          data:this.stocksList.map( x => x.stockName)
+        },
+        yAxis:{
+
+        },
+        dataZoom: [
+          {
+            type: 'inside'
+          }
+        ],
+        tooltip: {
+          trigger: 'item'
+        },
+        series: {
+          type: 'bar',
+          //radius: '60%',
+          data: this.stocksList.map(x => x.totalInvestment),
         }
       };
     }
