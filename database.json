@@ -1,69 +1,67 @@
 {
     "stocks": [
-        [
-            {
-                "stockName": "Wipro",
-                "price": "577.58",
-                "quantity": "6",
-                "sector": "IT",
-                "marketCap": "238402",
-                "totalInvestment": 3465.48,
-                "Id": 0
-            },
-            {
-                "stockName": "Trident",
-                "price": "47.65",
-                "quantity": "28",
-                "sector": "textiles",
-                "marketCap": "19894",
-                "totalInvestment": 1334.2,
-                "Id": 1
-            },
-            {
-                "stockName": "HFCL",
-                "price": "74.96",
-                "quantity": "13",
-                "sector": "Telecom",
-                "marketCap": "10896",
-                "totalInvestment": 974.48,
-                "Id": 2
-            },
-            {
-                "stockName": "IOCL",
-                "price": "83.03",
-                "quantity": "12",
-                "sector": "Oil",
-                "marketCap": "103579",
-                "totalInvestment": 996.36,
-                "Id": 3
-            },
-            {
-                "stockName": "Bank of Baroda",
-                "price": "92.11",
-                "quantity": "30",
-                "sector": "Finance",
-                "marketCap": "61151",
-                "totalInvestment": 2763.3,
-                "Id": 4
-            },
-            {
-                "stockName": "Hindustan Zinc",
-                "price": "320",
-                "quantity": "10",
-                "sector": "Matels",
-                "marketCap": "114675",
-                "totalInvestment": 3200,
-                "Id": 5
-            },
-            {
-                "stockName": "BCL Industries",
-                "price": "407.51",
-                "quantity": "12",
-                "sector": "Camicals",
-                "marketCap": "905",
-                "totalInvestment": 4890.12,
-                "Id": 6
-            }
-        ]
+        {
+            "stockName": "Wipro",
+            "price": 577.58,
+            "quantity": 6,
+            "sector": "IT",
+            "marketCap": 238402,
+            "totalInvestment": 3465.48,
+            "Id": 0
+        },
+        {
+            "stockName": "Trident",
+            "price": 47.65,
+            "quantity": 28,
+            "sector": "textiles",
+            "marketCap": 19894,
+            "totalInvestment": 1334.2,
+            "Id": 1
+        },
+        {
+            "stockName": "HFCL",
+            "price": 74.96,
+            "quantity": 13,
+            "sector": "Telecom",
+            "marketCap": 10896,
+            "totalInvestment": 974.48,
+            "Id": 2
+        },
+        {
+            "stockName": "IOCL",
+            "price": 83.03,
+            "quantity": 12,
+            "sector": "Oil",
+            "marketCap": 103579,
+            "totalInvestment": 996.36,
+            "Id": 3
+        },
+        {
+            "stockName": "Bank of Baroda",
+            "price": 92.11,
+            "quantity": 30,
+            "sector": "Finance",
+            "marketCap": 61151,
+            "totalInvestment": 2763.3,
+            "Id": 4
+        },
+        {
+            "stockName": "Hindustan Zinc",
+            "price": 320,
+            "quantity": 10,
+            "sector": "Matels",
+            "marketCap": 114675,
+            "totalInvestment": 3200,
+            "Id": 5
+        },
+        {
+            "stockName": "BCL Industries",
+            "price": 407.51,
+            "quantity": 12,
+            "sector": "Camicals",
+            "marketCap": 905,
+            "totalInvestment": 4890.12,
+            "Id": 6
+        }
     ]
 }

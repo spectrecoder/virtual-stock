@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class HttpService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+
+  public get(url:string,options?:any){
+    return this.http.get(url,options);
+  }
 }
