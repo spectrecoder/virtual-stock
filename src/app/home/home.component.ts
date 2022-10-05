@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { EChartsOption } from 'echarts';
+import { Constants } from '../config/constants';
+import { Stock } from '../models/Stock';
+import { HttpService } from '../services/http.service';
 import { JSONService } from '../services/json.service';
 import { UtilitiesService } from '../services/utilities.service';
 
@@ -21,7 +24,7 @@ export class HomeComponent implements OnInit {
     Id: ['']
   });
 
-  stocksList: any[] = [];
+  stocksList: Stock[] = [];
   submitted: boolean = false;
   isEdit:boolean = false;
 
@@ -35,7 +38,7 @@ export class HomeComponent implements OnInit {
   chartOption: EChartsOption = {};
   chartOptionBar: EChartsOption = {};
 
-  constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService) { }
+  constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService,private httpService:HttpService) { }
 
   ngOnInit(): void {
     this.BindStocks();
@@ -91,14 +94,21 @@ export class HomeComponent implements OnInit {
   }
 
   BindStocks() {
-    debugger
-    let list = this.json.Get(this.localStorageName);
-    if (list) {
+    // let list = this.json.Get(this.localStorageName);
+    // if (list) {
+    //   this.stocksList = list;
+    //   this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
+    //   this.AddSerialNo();
+    // }
+    this.httpService.get(Constants.APIURL + "stocks",{}).subscribe(resp => {
+      console.log(resp);
+      let list:any = resp;
+      if (list) {
       this.stocksList = list;
       this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
       this.AddSerialNo();
     }
-
+    })
   }
 
   AddSerialNo() {
@@ -121,10 +131,13 @@ export class HomeComponent implements OnInit {
   }
 
   calculateTotalAmount() {
+    debugger
     this.totalAmount = 0;
-    if (this.stocksList?.length > 0)
+    if (this.stocksList?.length > 0){
       this.stocksList.forEach(e => this.totalAmount = e.totalInvestment + this.totalAmount);
       this.totalAmount = Number(this.totalAmount.toFixed(2));
+    }
+      
   }
 
   fillChart() {

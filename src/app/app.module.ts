@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule,
     AppRoutingModule,
     FormsModule,
