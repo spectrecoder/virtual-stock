@@ -11,4 +11,8 @@ export class HttpService {
   public get(url:string,options?:any){
     return this.http.get(url,options);
   }
+
+  public post(url:string,options?:any){
+    return this.http.post(url,options);
+  }
 }

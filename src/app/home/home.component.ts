@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { EChartsOption } from 'echarts';
 import { Constants } from '../config/constants';
 import { Stock } from '../models/Stock';
 import { HttpService } from '../services/http.service';
 import { JSONService } from '../services/json.service';
 import { UtilitiesService } from '../services/utilities.service';
+import { ConfirmationBoxComponent } from '../shared/confirmation-box/confirmation-box.component';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   stocksList: Stock[] = [];
   submitted: boolean = false;
-  isEdit:boolean = false;
+  isEdit: boolean = false;
 
   localStorageName: string = 'StocksList';
 
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
   chartOption: EChartsOption = {};
   chartOptionBar: EChartsOption = {};
 
-  constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService,private httpService:HttpService) { }
+  constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService, private httpService: HttpService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.BindStocks();
@@ -49,9 +51,13 @@ export class HomeComponent implements OnInit {
   Save() {
     this.submitted = true;
     if (this.stocksForm.valid) {
-      this.stocksList.push(this.stocksForm.value);
-      this.AddSerialNo();
-      this.json.Save(this.stocksList, this.localStorageName);
+      this.httpService.post(Constants.APIURL + "stocks", this.stocksForm.value).subscribe(resp => {
+        debugger;
+        console.warn(resp);
+      })
+      // this.stocksList.push(this.stocksForm.value);
+      // this.AddSerialNo();
+      // this.json.Save(this.stocksList, this.localStorageName);
       this.submitted = false;
       this.Cancel();
     }
@@ -60,12 +66,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  Edit(item:any){
+  Edit(item: any) {
     this.isEdit = true;
     this.stocksForm.patchValue(item);
   }
 
-  Update(){
+  Update() {
     this.submitted = true;
     if (this.stocksForm.valid) {
       this.stocksList = this.stocksList.filter(e => e.Id != this.stocksForm.value.Id);
@@ -81,10 +87,21 @@ export class HomeComponent implements OnInit {
   }
 
   Delete(Id: number) {
-    this.stocksList = this.stocksList.filter(e => e.Id != Id);
-    this.AddSerialNo();
-    this.json.Save(this.stocksList, this.localStorageName);
-    this.Cancel();
+    debugger
+    const dialogRef = this.dialog.open(ConfirmationBoxComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.stocksList = this.stocksList.filter(e => e.Id != Id);
+        this.AddSerialNo();
+        this.json.Save(this.stocksList, this.localStorageName);
+        this.Cancel();
+      }
+    })
+
+
   }
 
   Cancel() {
@@ -100,14 +117,14 @@ export class HomeComponent implements OnInit {
     //   this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
     //   this.AddSerialNo();
     // }
-    this.httpService.get(Constants.APIURL + "stocks",{}).subscribe(resp => {
+    this.httpService.get(Constants.APIURL + "stocks", {}).subscribe(resp => {
       console.log(resp);
-      let list:any = resp;
+      let list: any = resp;
       if (list) {
-      this.stocksList = list;
-      this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
-      this.AddSerialNo();
-    }
+        this.stocksList = list;
+        this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
+        this.AddSerialNo();
+      }
     })
   }
 
@@ -133,11 +150,11 @@ export class HomeComponent implements OnInit {
   calculateTotalAmount() {
     debugger
     this.totalAmount = 0;
-    if (this.stocksList?.length > 0){
+    if (this.stocksList?.length > 0) {
       this.stocksList.forEach(e => this.totalAmount = e.totalInvestment + this.totalAmount);
       this.totalAmount = Number(this.totalAmount.toFixed(2));
     }
-      
+
   }
 
   fillChart() {
@@ -170,10 +187,10 @@ export class HomeComponent implements OnInit {
       };
 
       this.chartOptionBar = {
-        xAxis:{
-          data:this.stocksList.map( x => x.stockName)
+        xAxis: {
+          data: this.stocksList.map(x => x.stockName)
         },
-        yAxis:{
+        yAxis: {
 
         },
         dataZoom: [
