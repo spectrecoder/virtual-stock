@@ -1,4 +1,5 @@
 <div class="container" style="margin-top: 5em;">
+
     <div class="row">
         <h3>Stocks Form
             <span class="right-sm">
@@ -8,6 +9,7 @@
             </span>
         </h3>
     </div>
+
     <form class="card" [formGroup]="stocksForm">
         <div class="row">
             <div class="col-md-4">
@@ -68,6 +70,7 @@
             </div>
         </div>
     </form>
+
     <div class="card" style="margin-top: 2em;">
         <div class="row">
             <h3>Available Stocks</h3>
@@ -84,7 +87,6 @@
                     <th>Sector</th>
                     <th>Actions</th>
                 </tr>
-
             </thead>
             <tbody *ngIf="stocksList.length > 0">
                 <tr *ngFor="let item of stocksList;let i = index;">
@@ -97,7 +99,7 @@
                     <td>{{item.sector}}</td>
                     <td>
                         <button type="button" class="btn btn-primary" (click)="Edit(item)">Edit</button>
-                        <button type="button" class="btn btn-danger" (click)="Delete(item.Id)">Delete</button>
+                        <button type="button" class="btn btn-danger" (click)="Delete(item.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -116,8 +118,8 @@
             <div class="col-sm-6">Total Investments</div>
             <div class="col-sm-6">{{totalAmount}}</div>
         </div>
-        
     </div>
+
     <div class="card" style="margin-top:2em;">
         <div class="row">
             <h3>Available Stocks</h3>

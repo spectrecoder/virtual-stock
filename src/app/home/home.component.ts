@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     sector: ['', [Validators.required]],
     marketCap: ['', [Validators.required]],
     totalInvestment: ['', [Validators.required]],
-    Id: ['']
+    id: ['']
   });
 
   stocksList: Stock[] = [];
@@ -52,17 +52,13 @@ export class HomeComponent implements OnInit {
     this.submitted = true;
     if (this.stocksForm.valid) {
       this.httpService.post(Constants.APIURL + "stocks", this.stocksForm.value).subscribe(resp => {
-        debugger;
-        console.warn(resp);
-      })
-      // this.stocksList.push(this.stocksForm.value);
-      // this.AddSerialNo();
-      // this.json.Save(this.stocksList, this.localStorageName);
-      this.submitted = false;
-      this.Cancel();
+        this.BindStocks();
+        this.submitted = false;
+        this.Cancel();
+      });
     }
     else {
-
+      //focus on invalid form control && show toster
     }
   }
 
@@ -74,15 +70,13 @@ export class HomeComponent implements OnInit {
   Update() {
     this.submitted = true;
     if (this.stocksForm.valid) {
-      this.stocksList = this.stocksList.filter(e => e.Id != this.stocksForm.value.Id);
-      this.stocksList.push(this.stocksForm.value);
-      this.AddSerialNo();
-      this.json.Save(this.stocksList, this.localStorageName);
-      this.submitted = false;
-      this.Cancel();
+      this.httpService.patch(Constants.APIURL + 'stocks/' + this.stocksForm.value.id, this.stocksForm.value).subscribe(resp => {
+        this.BindStocks();
+        this.Cancel();
+      });
     }
     else {
-
+      //focus on invalid form control && show toster
     }
   }
 
@@ -94,14 +88,11 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.stocksList = this.stocksList.filter(e => e.Id != Id);
-        this.AddSerialNo();
-        this.json.Save(this.stocksList, this.localStorageName);
-        this.Cancel();
+        this.httpService.delete(Constants.APIURL + "stocks/" + Id, {}).subscribe(resp => {
+          this.BindStocks();
+        })
       }
-    })
-
-
+    });
   }
 
   Cancel() {
@@ -111,31 +102,16 @@ export class HomeComponent implements OnInit {
   }
 
   BindStocks() {
-    // let list = this.json.Get(this.localStorageName);
-    // if (list) {
-    //   this.stocksList = list;
-    //   this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
-    //   this.AddSerialNo();
-    // }
     this.httpService.get(Constants.APIURL + "stocks", {}).subscribe(resp => {
       console.log(resp);
       let list: any = resp;
       if (list) {
         this.stocksList = list;
         this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
-        this.AddSerialNo();
+        this.calculateTotalAmount();
+        this.fillChart();
       }
-    })
-  }
-
-  AddSerialNo() {
-    if (this.stocksList.length > 0) {
-      for (let index = 0; index < this.stocksList.length; index++) {
-        this.stocksList[index].Id = index;
-      }
-    }
-    this.calculateTotalAmount();
-    this.fillChart();
+    });
   }
 
   calculateTotalInvestment() {
@@ -148,13 +124,11 @@ export class HomeComponent implements OnInit {
   }
 
   calculateTotalAmount() {
-    debugger
     this.totalAmount = 0;
     if (this.stocksList?.length > 0) {
       this.stocksList.forEach(e => this.totalAmount = e.totalInvestment + this.totalAmount);
       this.totalAmount = Number(this.totalAmount.toFixed(2));
     }
-
   }
 
   fillChart() {
@@ -203,11 +177,9 @@ export class HomeComponent implements OnInit {
         },
         series: {
           type: 'bar',
-          //radius: '60%',
           data: this.stocksList.map(x => x.totalInvestment),
         }
       };
     }
   }
-
 }

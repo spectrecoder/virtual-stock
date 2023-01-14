@@ -5,5 +5,5 @@ export class Stock {
     public sector! :string;
     public marketCap!: number;
     public totalInvestment!: number;
-    public Id!: number;
+    public id!: number;
 }

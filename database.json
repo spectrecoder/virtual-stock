@@ -28,31 +28,22 @@
       "totalInvestment": 974.48
     },
     {
-      "id": 4,
-      "stockName": "IOCL",
-      "price": 83.03,
-      "quantity": 12,
-      "sector": "Oil",
-      "marketCap": 103579,
-      "totalInvestment": 996.36
-    },
-    {
       "id": 5,
       "stockName": "Bank of Baroda",
-      "price": 92.11,
-      "quantity": 30,
+      "price": "89.05",
+      "quantity": "15",
       "sector": "Finance",
       "marketCap": 61151,
-      "totalInvestment": 2763.3
+      "totalInvestment": 1335.75
     },
     {
       "id": 6,
       "stockName": "Hindustan Zinc",
-      "price": 320,
+      "price": "295.90",
       "quantity": 10,
       "sector": "Matels",
       "marketCap": 114675,
-      "totalInvestment": 3200
+      "totalInvestment": 2959
     },
     {
       "id": 7,
@@ -64,14 +55,22 @@
       "totalInvestment": 4890.12
     },
     {
-      "stockName": "dfgfd",
-      "price": "324",
-      "quantity": "43",
-      "sector": "3242",
-      "marketCap": "23432",
-      "totalInvestment": 13932,
-      "Id": null,
+      "stockName": "ANG Life Sciences",
+      "price": "138.41",
+      "quantity": "42",
+      "sector": "Pharmaceuticals",
+      "marketCap": "155",
+      "totalInvestment": 5813.22,
       "id": 8
+    },
+    {
+      "stockName": "Castrol India",
+      "price": "105.21",
+      "quantity": "29",
+      "sector": "Chemicals",
+      "marketCap": "12310",
+      "totalInvestment": 3051.09,
+      "id": 9
     }
   ]
 }

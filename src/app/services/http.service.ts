@@ -15,4 +15,12 @@ export class HttpService {
   public post(url:string,options?:any){
     return this.http.post(url,options);
   }
+
+  public delete(url:string,options?:any){
+    return this.http.delete(url,options);
+  }
+
+  public patch(url:string,options?:any){
+    return this.http.patch(url,options);
+  }
 }
