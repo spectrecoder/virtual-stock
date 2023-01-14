@@ -167,15 +167,11 @@ export class HomeComponent implements OnInit {
         yAxis: {
 
         },
-        dataZoom: [
-          {
-            type: 'inside'
-          }
-        ],
+
         tooltip: {
           trigger: 'item'
         },
-        series: {
+        series: {          
           type: 'bar',
           data: this.stocksList.map(x => x.totalInvestment),
         }
