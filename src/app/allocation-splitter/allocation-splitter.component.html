@@ -1,0 +1,67 @@
+<div class="container" [formGroup]="stocksForm">
+    <h3>
+        Splitter Form
+    </h3>
+    <div class="row">
+        <div class="col-md-4 row">
+            <label class="col-md-12">Number of stocks</label>
+            <div class="form-group col-md-12">
+                <input class="form-control form-control-sm" formControlName="NoOfStocks">
+            </div>
+        </div>
+        <div class="col-md-4 row">
+            <label class="col-md-12">Total Amount</label>
+            <div class="form-group col-md-12">
+                <input class="form-control form-control-sm" formControlName="TotalAmount">
+            </div>
+        </div>
+        <div class="col-md-4 text-align-center align-items-center">
+            <button class="btn btn-primary" type="button" (click)="BuildForm()">Build Form</button>
+        </div>
+    </div>
+
+    <div>
+        <div formArrayName="items" *ngFor="let item of getControls(); let i = index;">
+            <div [formGroupName]="i" class="row">
+                <div class="col-md-2">
+                    {{i + 1}}
+                </div>
+                <div class="col-md-2 row">
+                    <label class="col-md-12">Name</label>
+                    <div class="form-group col-md-12">
+                        <input class="form-control form-control-sm" formControlName="name">
+                    </div>
+                </div>
+                <div class="col-md-2 row">
+                    <label class="col-md-12">Price</label>
+                    <div class="form-group col-md-12">
+                        <input class="form-control form-control-sm" formControlName="price">
+                    </div>
+                    
+                </div>
+                <div class="col-md-2 row">
+                    <label class="col-md-12">Amount</label>
+                    <div class="form-group col-md-12">
+                        <input class="form-control form-control-sm" formControlName="allocationAmount">
+                    </div>
+                    
+                </div>
+                <div class="col-md-2 row">
+                    <label class="col-md-12">Count</label>
+                    <div class="form-group col-md-12">
+                        <input class="form-control form-control-sm" formControlName="sharesAllocated">
+                    </div>
+                    
+                </div>
+                <div class="col-md-2 row">
+                    <label class="col-md-12">total cost</label>
+                    <div class="form-group col-md-12">
+                        <input class="form-control form-control-sm" formControlName="costOfPurchase">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

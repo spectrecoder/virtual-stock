@@ -12,12 +12,14 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AllocationSplitterComponent } from './allocation-splitter/allocation-splitter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AllocationSplitterComponent
 
   ],
   imports: [
