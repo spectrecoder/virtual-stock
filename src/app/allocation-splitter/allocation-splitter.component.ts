@@ -9,6 +9,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 export class AllocationSplitterComponent {
   stocksForm! : FormGroup;
   stocks!:FormArray;
+  TotalInvestment:number = 0;
 
   constructor(private fb:FormBuilder){
     this.stocksForm = this.fb.group({
@@ -44,6 +45,31 @@ export class AllocationSplitterComponent {
     for(let i = 0;i < count; i++){
       this.stocks = this.stocksForm.get('items') as FormArray;
       this.stocks.push(this.createItem(perStockCost));
+    }
+  }
+
+  Calculations(){
+    let items  = this.stocksForm.controls["items"].value;
+
+    let fg = this.stocksForm.get("items") as FormArray;
+
+    if(items?.length > 0){
+      this.TotalInvestment = 0;
+      for(let index:number = 0 ; index < items.length; index++){
+        let formData = items[index];
+        if(formData?.allocationAmount && formData?.price){
+          let sharesAllocated:any = Number(formData?.allocationAmount) / Number(formData?.price);
+          sharesAllocated = sharesAllocated.toFixed(0);
+          if(sharesAllocated){
+            let costOfPurchase = Number(formData?.price) * Number(sharesAllocated);
+
+            fg.at(index).get("sharesAllocated")?.setValue(sharesAllocated);
+            fg.at(index).get("costOfPurchase")?.setValue(costOfPurchase);
+
+            this.TotalInvestment += costOfPurchase;
+          }
+        }
+      }
     }
   }
 }
