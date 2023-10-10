@@ -1,76 +1,104 @@
 {
   "stocks": [
     {
-      "id": 1,
-      "stockName": "Wipro",
-      "price": 577.58,
-      "quantity": 6,
-      "sector": "IT",
-      "marketCap": 238402,
-      "totalInvestment": 3465.48
-    },
-    {
-      "id": 2,
-      "stockName": "Trident",
-      "price": 47.65,
-      "quantity": 28,
+      "stockName": "Raymond",
+      "price": "1556.40",
+      "quantity": "4",
       "sector": "textiles",
-      "marketCap": 19894,
-      "totalInvestment": 1334.2
+      "marketCap": "11857",
+      "totalInvestment": 6225.6,
+      "id": 1,
+      "currentPrice": "1810.65"
     },
     {
+      "stockName": "BCL Industeries",
+      "price": "407.51",
+      "quantity": "12",
+      "sector": "FMCG",
+      "marketCap": "13201",
+      "totalInvestment": 4890.12,
+      "id": 2,
+      "currentPrice": "534.15"
+    },
+    {
+      "stockName": "LT Foods",
+      "price": "134.11",
+      "quantity": "36",
+      "sector": "FMCG",
+      "marketCap": "5900",
+      "totalInvestment": 4827.96,
       "id": 3,
-      "stockName": "HFCL",
-      "price": 74.96,
-      "quantity": 13,
-      "sector": "Telecom",
-      "marketCap": 10896,
-      "totalInvestment": 974.48
+      "currentPrice": "172.55"
     },
     {
+      "stockName": "D Link India",
+      "price": "270.98",
+      "quantity": "18",
+      "sector": "IT Hardware",
+      "marketCap": "1157",
+      "totalInvestment": 4877.64,
+      "id": 4,
+      "currentPrice": "320.20"
+    },
+    {
+      "stockName": "Kelton Tech Solutions",
+      "price": "73.42",
+      "quantity": "63",
+      "sector": "IT Software",
+      "marketCap": "801",
+      "totalInvestment": 4625.46,
       "id": 5,
-      "stockName": "Bank of Baroda",
-      "price": "89.05",
-      "quantity": "15",
-      "sector": "Finance",
-      "marketCap": 61151,
-      "totalInvestment": 1335.75
+      "currentPrice": "83.80"
     },
     {
-      "id": 6,
-      "stockName": "Hindustan Zinc",
-      "price": "295.90",
-      "quantity": 10,
+      "stockName": "Hindustan zinc",
+      "price": "304.02",
+      "quantity": "16",
       "sector": "Matels",
-      "marketCap": 114675,
-      "totalInvestment": 2959
+      "marketCap": "131745",
+      "totalInvestment": 4864.32,
+      "id": 6,
+      "currentPrice": "317.05"
     },
     {
+      "stockName": "Intense TEch",
+      "price": "80.47",
+      "quantity": "63",
+      "sector": "IT Software",
+      "marketCap": "185",
+      "totalInvestment": 5069.61,
       "id": 7,
-      "stockName": "BCL Industries",
-      "price": 407.51,
-      "quantity": 12,
+      "currentPrice": "79.45"
+    },
+    {
+      "stockName": "ITC",
+      "price": "422.72",
+      "quantity": "11",
+      "sector": "FMCG",
+      "marketCap": "548845",
+      "totalInvestment": 4649.92,
+      "id": 8,
+      "currentPrice": "444.40"
+    },
+    {
+      "stockName": "Castrol oil",
+      "price": "112.03",
+      "quantity": "35",
       "sector": "Camicals",
-      "marketCap": 905,
-      "totalInvestment": 4890.12
+      "marketCap": "13378",
+      "totalInvestment": 3921.05,
+      "id": 9,
+      "currentPrice": "137.90"
     },
     {
-      "stockName": "ANG Life Sciences",
-      "price": "138.41",
-      "quantity": "42",
-      "sector": "Pharmaceuticals",
-      "marketCap": "155",
-      "totalInvestment": 5813.22,
-      "id": 8
-    },
-    {
-      "stockName": "Castrol India",
-      "price": "105.21",
-      "quantity": "29",
-      "sector": "Chemicals",
-      "marketCap": "12310",
-      "totalInvestment": 3051.09,
-      "id": 9
+      "stockName": "Wipro",
+      "price": "498.31",
+      "quantity": "10",
+      "sector": "IT Software",
+      "marketCap": "222550",
+      "totalInvestment": 4983.1,
+      "id": 10,
+      "currentPrice": "407.75"
     }
   ]
 }

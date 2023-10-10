@@ -68,6 +68,10 @@
                         is Required</span>
                 </div>
             </div>
+            <div class="col-md-4">
+                <label for="">Current Price</label>
+                <input type="text" formControlName="currentPrice" class="form-control form-control-sm">
+            </div>
         </div>
     </form>
 
@@ -130,6 +134,11 @@
             </div>
             <div class="col-sm-6">
                 <div echarts [options]="chartOption" class="demo-chart"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div echarts [options]="chartOptionCompare" class="demo-chart"></div>
             </div>
         </div>
     </div>

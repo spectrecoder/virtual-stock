@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     sector: ['', [Validators.required]],
     marketCap: ['', [Validators.required]],
     totalInvestment: ['', [Validators.required]],
+    currentPrice: [''],
     id: ['']
   });
 
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   chartOption: EChartsOption = {};
   chartOptionBar: EChartsOption = {};
+  chartOptionCompare: EChartsOption = {};
 
   constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService, private httpService: HttpService, public dialog: MatDialog) { }
 
@@ -171,10 +173,35 @@ export class HomeComponent implements OnInit {
         tooltip: {
           trigger: 'item'
         },
-        series: {          
-          type: 'bar',
-          data: this.stocksList.map(x => x.totalInvestment),
-        }
+        series:
+          {
+            type: 'bar',
+            data: this.stocksList.map(x => x.totalInvestment),
+          }
+      };
+      
+
+      this.chartOptionCompare = {
+        xAxis: {
+          data: this.stocksList.map(x => x.stockName)
+        },
+        yAxis: {
+
+        },
+
+        tooltip: {
+          trigger: 'item'
+        },
+        series:[
+          {
+            type: 'bar',
+            data: this.stocksList.map(x => x.totalInvestment),
+          },
+          {
+            type:'bar',
+            data:this.stocksList.map(x => x.currentPrice * x.quantity)
+          }
+        ]
       };
     }
   }

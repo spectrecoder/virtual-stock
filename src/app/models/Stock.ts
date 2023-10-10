@@ -6,4 +6,5 @@ export class Stock {
     public marketCap!: number;
     public totalInvestment!: number;
     public id!: number;
+    public currentPrice!:number;
 }
