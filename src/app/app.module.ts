@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AllocationSplitterComponent } from './allocation-splitter/allocation-splitter.component';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AllocationSplitterComponent } from './allocation-splitter/allocation-sp
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
-    MatDialogModule
+    MatDialogModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
