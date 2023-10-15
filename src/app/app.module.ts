@@ -14,13 +14,15 @@ import { SharedModule } from './shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AllocationSplitterComponent } from './allocation-splitter/allocation-splitter.component';
 import { LayoutModule } from './layout/layout.module';
+import { PortfolioTrackerComponent } from './portfolio-tracker/portfolio-tracker.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    AllocationSplitterComponent
+    AllocationSplitterComponent,
+    PortfolioTrackerComponent
 
   ],
   imports: [
