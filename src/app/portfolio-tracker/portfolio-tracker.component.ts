@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort,Sort } from '@angular/material/sort';
 import { EChartsOption } from 'echarts';
 import { Constants } from '../config/constants';
 import { Stock } from '../models/Stock';
@@ -8,6 +9,7 @@ import { HttpService } from '../services/http.service';
 import { JSONService } from '../services/json.service';
 import { UtilitiesService } from '../services/utilities.service';
 import { ConfirmationBoxComponent } from '../shared/confirmation-box/confirmation-box.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-portfolio-tracker',
@@ -29,7 +31,8 @@ export class PortfolioTrackerComponent {
   stocksList: Stock[] = [];
   submitted: boolean = false;
   isEdit: boolean = false;
-
+  displayedColumns:String[] = ["SerialNo","stockName","quantity","price","totalInvestment","currentPrice","currentValue","marketCap","sector","actions"];
+  dataSource!:MatTableDataSource<Stock>;
   localStorageName: string = 'StocksList';
 
   onlyNumeric = this.service.integerValidation;
@@ -40,6 +43,7 @@ export class PortfolioTrackerComponent {
   chartOption: EChartsOption = {};
   chartOptionBar: EChartsOption = {};
   chartOptionCompare: EChartsOption = {};
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public json: JSONService, private fb: UntypedFormBuilder, public service: UtilitiesService, private httpService: HttpService, public dialog: MatDialog) { }
 
@@ -110,10 +114,13 @@ export class PortfolioTrackerComponent {
       let list: any = resp;
       if (list) {
         this.stocksList = list;
+        this.dataSource = new MatTableDataSource<Stock>(this.stocksList);
         this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
         this.stocksList.forEach(e => e.currentValue = Number(Number(e.quantity * e.currentPrice).toFixed(2)));
         this.calculateTotalAmount();
         this.fillChart();
+        this.dataSource = new MatTableDataSource<Stock>(this.stocksList);
+        this.dataSource.sort = this.sort;
       }
     });
   }
@@ -166,7 +173,11 @@ export class PortfolioTrackerComponent {
 
       this.chartOptionBar = {
         xAxis: {
-          data: this.stocksList.map(x => x.stockName)
+          data: this.stocksList.map(x => x.stockName),
+          axisLabel:{
+            interval:0,
+            rotate:45
+          }
         },
         yAxis: {
 
@@ -185,7 +196,11 @@ export class PortfolioTrackerComponent {
 
       this.chartOptionCompare = {
         xAxis: {
-          data: this.stocksList.map(x => x.stockName)
+          data: this.stocksList.map(x => x.stockName),
+          axisLabel:{
+            interval:0,
+            rotate:45
+          }
         },
         yAxis: {
 

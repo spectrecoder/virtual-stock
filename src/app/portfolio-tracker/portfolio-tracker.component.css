@@ -10,3 +10,16 @@ button {
 h3{
     color: #0d6efd;
 }
+
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  th{
+    font-weight:bolder;
+    font-style: oblique;
+  }

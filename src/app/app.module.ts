@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { AllocationSplitterComponent } from './allocation-splitter/allocation-splitter.component';
 import { LayoutModule } from './layout/layout.module';
 import { PortfolioTrackerComponent } from './portfolio-tracker/portfolio-tracker.component';
@@ -38,7 +40,9 @@ import { PortfolioTrackerComponent } from './portfolio-tracker/portfolio-tracker
       echarts: () => import('echarts'),
     }),
     MatDialogModule,
-    LayoutModule
+    LayoutModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
