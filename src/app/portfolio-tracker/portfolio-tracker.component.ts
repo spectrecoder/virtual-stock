@@ -23,7 +23,7 @@ export class PortfolioTrackerComponent {
     marketCap: ['', [Validators.required]],
     totalInvestment: ['', [Validators.required]],
     currentPrice: [''],
-    id: ['']
+    id: [{value:'',disabled:true}]
   });
 
   stocksList: Stock[] = [];
@@ -52,7 +52,7 @@ export class PortfolioTrackerComponent {
   Save() {
     this.submitted = true;
     if (this.stocksForm.valid) {
-      this.httpService.post(Constants.APIURL + "stocks", this.stocksForm.value).subscribe(resp => {
+      this.httpService.post(Constants.APIURL + "stock", this.stocksForm.value).subscribe(resp => {
         this.BindStocks();
         this.submitted = false;
         this.Cancel();
@@ -64,14 +64,16 @@ export class PortfolioTrackerComponent {
   }
 
   Edit(item: any) {
+    debugger
     this.isEdit = true;
     this.stocksForm.patchValue(item);
   }
 
   Update() {
+    debugger
     this.submitted = true;
     if (this.stocksForm.valid) {
-      this.httpService.patch(Constants.APIURL + 'stocks/' + this.stocksForm.value.id, this.stocksForm.value).subscribe(resp => {
+      this.httpService.put(Constants.APIURL + 'stock/' + this.stocksForm.getRawValue().id, this.stocksForm.getRawValue()).subscribe(resp => {
         this.BindStocks();
         this.Cancel();
       });
@@ -89,7 +91,7 @@ export class PortfolioTrackerComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.httpService.delete(Constants.APIURL + "stocks/" + Id, {}).subscribe(resp => {
+        this.httpService.delete(Constants.APIURL + "stock/" + Id, {}).subscribe(resp => {
           this.BindStocks();
         })
       }
@@ -103,12 +105,13 @@ export class PortfolioTrackerComponent {
   }
 
   BindStocks() {
-    this.httpService.get(Constants.APIURL + "stocks", {}).subscribe(resp => {
+    this.httpService.get(Constants.APIURL + "stock", {}).subscribe(resp => {
       console.log(resp);
       let list: any = resp;
       if (list) {
         this.stocksList = list;
         this.stocksList.forEach(e => e.totalInvestment = Number(e.totalInvestment.toFixed(2)));
+        this.stocksList.forEach(e => e.currentValue = Number(Number(e.quantity * e.currentPrice).toFixed(2)));
         this.calculateTotalAmount();
         this.fillChart();
       }

@@ -23,4 +23,8 @@ export class HttpService {
   public patch(url:string,options?:any){
     return this.http.patch(url,options);
   }
+
+  public put(url:string,options?:any){
+    return this.http.put(url,options);
+  }
 }
