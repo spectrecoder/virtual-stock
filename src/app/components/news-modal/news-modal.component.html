@@ -1,0 +1,61 @@
+<div>
+    <div class="container">
+        <div class="row card-deck mt-4">
+            <div class="col-12 col-md-6 align-items-stretch d-flex mb-3" *ngFor="let news of companyNews">
+                <div class="card bg-light d-flex news-item p-4" (click)="open(news, content)">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-12">
+                            <img src="{{ news.urlToImage }}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="col-md-8 col-12 p-0">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ news.title }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <div class="modal-title" id="" >
+          <h1> {{ currNews.source }} </h1>
+          <h5> {{ currNews.publishedAt }} </h5>
+      </div>
+
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <h2>
+            {{ currNews.title }}
+        </h2>
+        <p>{{ currNews.description }}</p>
+        <p>
+          For more details click <a href="{{ currNews.url}}" target="_blank">here</a>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <div class="col mr-auto d-flex align-items-stretch flex-column p-2 border bg-sucess">
+            <div class=""> Share</div>
+            <div class="d-flex flex-row">
+                <div class="">
+                    <a target="_blank" href="{{ 'https://twitter.com/intent/tweet?text=' + currNews.encodedTitle  + '%20' + currNews.encodedUrl }}" class="twitter-share-button" data-show-count="false">
+                        <i class="fa fa-3x fa-twitter"></i>
+                    </a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <div class="ml-2" attr.data-href="{{ currNews.url }}" data-layout="button_count" data-size="small">
+                    <a target="_blank" href="{{ 'https://www.facebook.com/sharer/sharer.php?u=' +  currNews.encodedUrl + '&amp;src=sdkpreparse'}}" class="fb-xfbml-parse-ignore">
+                        <i class="fa fa-facebook-official fa-3x" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+    

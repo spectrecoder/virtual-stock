@@ -1,1 +1,42 @@
-<app-layout></app-layout>
+<div class="d-flex flex-column align-self-stretch" style="min-height: 100%;">
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+		<a style="outline: none;" routerLink="/" class="navbar-brand nav-link">Stock Search</a>
+		<button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon" >
+			</span>
+		</button>
+	
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-md-auto">
+				<li class="nav-item">
+					<a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLink="/" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Search
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/watchlist" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Watchlist
+						</div>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" routerLink="/portfolio" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							Portfolio
+						</div>
+					</a>
+				  </li>
+			</ul>
+		  </div>
+	</nav>
+	<div class="flex-grow-1">
+		<router-outlet></router-outlet>
+	</div>
+
+	<div class="d-flex justify-content-center p-3 mt-3 footer">
+		Powered by Tingo. Developed by Shamsuddin Rehmani
+	</div>
+</div>

@@ -1,0 +1,19 @@
+
+
+.form-container input:focus{
+    outline: none;
+}
+
+.search-container {
+    border:2px solid #714ef9;
+    border-radius: 20px;
+}
+
+.search-container button i{
+    color: #714ef9;
+}
+
+
+
+
+

@@ -1,0 +1,13 @@
+.market-closed {
+    background-color: 	#fcd6d8;
+    color: #8e1727;
+}
+
+.market-open {
+    background-color:#d1eedb;
+    color: #3e8672;
+}
+
+.star{
+    cursor: pointer;
+}

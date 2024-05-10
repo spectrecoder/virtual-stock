@@ -1,14 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+ 
+body {
+    padding: 0px;
+    margin: 0px;
+	/* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+}
 
-.right-sm{
-    right: 0;
-    float: right;
+
+/* nav a {
+    color: white !important;
+    
 }
-.right-sm > *{
-    margin-left: 10px;
+
+nav a:hover {
+	color: gray !important;	
+} */
+
+
+.navbar {
+    background-color: #714ef9 !important;
 }
-.card{
-    margin:5px;
-    border: 0px !important;
+
+.navbar-custom {
+    background-color: #714ef9 !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.align-end {
+    text-align: end;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+
+/* .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: 	#dcdcdc;
+    overflow: auto;
+} */
+

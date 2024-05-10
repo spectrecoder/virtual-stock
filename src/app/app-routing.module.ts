@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AllocationSplitterComponent } from './allocation-splitter/allocation-splitter.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { PortfolioTrackerComponent } from './portfolio-tracker/portfolio-tracker.component';
+import { Routes, RouterModule } from '@angular/router';
+import { TickerSearchComponent  } from 'src/app/components/ticker-search/ticker-search.component';
+import { WatchlistComponent  } from 'src/app/components/watchlist/watchlist.component';
+import { DetailsComponent } from 'src/app/components/details/details.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
-  {path:'login',component:LoginComponent},
-  {path:'allocationsplitter',component:AllocationSplitterComponent},
-  {path:'portfoliotracker',component:PortfolioTrackerComponent},
-  {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'**',redirectTo:'login'}
+
+  { path: '', component: TickerSearchComponent },
+  { path: 'watchlist', component: WatchlistComponent },
+  { path: 'details/:ticker', component: DetailsComponent },
+  { path: 'portfolio', component: PortfolioComponent },
+  { path: '**',   redirectTo: '', pathMatch: 'full' }
+  
 ];
 
 @NgModule({

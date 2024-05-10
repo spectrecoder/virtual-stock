@@ -1,0 +1,137 @@
+<div>
+    <div class="container">
+        <div class="row px-4 px-sm-0">
+            <div class='col mt-4'>
+                <h1>My Portfolio</h1>
+            </div>
+        </div>
+        <div *ngIf="isPortfolioEmpty;">
+            <div class="row px-4 px-sm-0">
+                <div class="col text-center alert alert-warning" role="alert">
+                    Currently you don't have any stock
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!isPortfolioEmpty;">
+            <div *ngIf="isLoading" class="is-loading spinner" layout="row" layout-align="center center">
+                <mat-spinner mode="indeterminate" diameter="60"></mat-spinner>
+            </div>
+            <ng-container *ngIf="!isLoading">
+                <div class="row" *ngFor="let item of portfolioData; let i = index">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <strong> {{ item.ticker }} </strong>  <span>  {{item.name}} </span>
+                            </div>
+                            <div class="card-body portfolio-font">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                Quantity:
+                                            </div>
+                                            <div class="col align-end">
+                                                {{ item.qty | number}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                Avg. Cost / Share:
+                                            </div>
+                                            <div class="col align-end">
+                                                {{ item.avgCost | number:'1.2-2'}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col ">
+                                                Total Cost:
+                                            </div>
+                                            <div class="col align-end">
+                                                {{ item.totalCost | number:'1.2-2'}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                Change:
+                                            </div>
+                                            <div class="col align-end">
+                                                <span *ngIf="item.isChangePos" class="positive"> 
+                                                    <svg width="0.8em" height="0.8em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                    </svg>
+                                                    {{ item.change | number:'1.2-2'}}
+                                                </span>
+                                                <span *ngIf="item.isChangeNeg" class="negative">
+                                                    <svg width="0.8em" height="0.8em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                                    </svg>
+                                                    {{ item.change | number:'1.2-2'}}
+                                                </span>
+                                                <span *ngIf="!item.isChangePos && !item.isChangeNeg"> 
+                                                    {{ item.change | number:'1.2-2'}} 
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                Current Price:
+                                            </div>
+                                            <div class="col align-end">
+                                                <span *ngIf="item.isChangePos" class="positive"> 
+                                                    <svg width="0.8em" height="0.8em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                    </svg>
+                                                    {{ item.last | number:'1.2-2'}}
+                                                </span>
+                                                <span *ngIf="item.isChangeNeg" class="negative">
+                                                    <svg width="0.8em" height="0.8em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                                    </svg>
+                                                    {{ item.last | number:'1.2-2'}}
+                                                </span>
+                                                <span *ngIf="!item.isChangePos && !item.isChangeNeg"> 
+                                                    {{ item.last | number:'1.2-2'}} 
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col ">
+                                                Market Value:
+                                            </div>
+                                            <div class="col align-end">
+                                                <span *ngIf="item.isChangePos" class="positive"> 
+                                                    <svg width="0.8em" height="0.8em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                    </svg>
+                                                    {{ item.marketVal | number:'1.2-2' }}
+                                                </span>
+                                                <span *ngIf="item.isChangeNeg" class="negative">
+                                                    <svg width="0.8em" height="0.8em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                                    </svg>
+                                                    {{ item.marketVal | number:'1.2-2'}}
+                                                </span>
+                                                <span *ngIf="!item.isChangePos && !item.isChangeNeg"> 
+                                                    {{ item.marketVal | number:'1.2-2' }} 
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <div class="d-flex flex-row-reverse">
+                                    <app-buy-modal (itemBuyEvent)="updateData($event)" [companyPrice]="[portfolioCompPrice[i]]" [idx]="i" [isBuy]="false"></app-buy-modal>
+                                    <app-buy-modal (itemBuyEvent)="updateData($event)" [companyPrice]="[portfolioCompPrice[i]]" [idx]="i" [isBuy]="true" [buttonPortfolio]="true"></app-buy-modal>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

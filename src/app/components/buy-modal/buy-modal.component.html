@@ -1,0 +1,60 @@
+<div class="col">
+    <div *ngIf="isBuy; else sellBlock">
+        <div *ngIf="buttonPortfolio; else detailButton">
+            <button class='btn btn-primary' (click)="open(content)">Buy</button>
+        </div>
+        <ng-template #detailButton>
+            <button class='btn btn-success' (click)="open(content)">Buy</button>
+        </ng-template>
+
+    </div>
+    <ng-template #sellBlock>
+        <button class='btn btn-danger' (click)="open(content)">Sell</button>
+    </ng-template>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss" >
+    <div class="modal-header">
+      <div class="modal-title" id="" >
+          <h5> {{ companyPrice[0].ticker }} </h5>
+      </div>
+
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div>
+                        Current Price: {{ companyPrice[0].last }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="inputQty" class="col-sm-auto col-form-label">Quantity</label>
+                <div class="">
+                    <input #qty (keyup)="onKey(qty.value)" type="number" class="form-control" id="inputQty" value="0" ngbAutofocus onfocus="let value = this.value; this.value = null; this.value=value">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="col d-flex">
+            <div class="mr-auto p-2">
+                Total: {{ total }}
+            </div>
+            <div class="">
+                <div *ngIf="isBuy; else sellBlock">
+                    <button class='btn btn-success' (click)="buy()" (click)="c('buy click')" [disabled]="isDisabled">Buy</button>
+                </div>
+                <ng-template #sellBlock>
+                    <button class='btn btn-success' (click)="sell()" (click)="c('buy click')" [disabled]="isDisabled">Sell</button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</ng-template>

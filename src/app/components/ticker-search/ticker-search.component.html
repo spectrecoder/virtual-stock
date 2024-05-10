@@ -1,0 +1,37 @@
+<div class="container pt-5">
+  <div class="row justify-content-center pt-5">
+    <div class="col-md-auto">
+      <div class="text-center display-3 font-weight-normal">
+        STOCK SEARCH
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row justify-content-center pt-5">
+    <div class="col-auto">
+      <form class="form-container" [formGroup]='searchForm' (ngSubmit)="onSubmit(searchBar.value)">
+        <div class="search-container p-1 px-3 col-xs-2">
+          <div class="input-group">
+            <input formControlName='userInput' #searchBar type="text" class="border-0" placeholder="Enter stock name" [matAutocomplete]="auto" aria-label="Stock ticker name" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn p-0 px-2" type="submit"><i class="fa fa-search fa-lg"></i></button>
+            </div>
+          </div>
+
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="20"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let company of companySResults" [value]="company">
+                <span>{{ company.ticker }}</span>
+                <span> | {{ company.name }}</span>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
